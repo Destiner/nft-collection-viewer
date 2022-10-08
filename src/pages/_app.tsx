@@ -1,3 +1,6 @@
+import '@fontsource/nunito/500.css';
+import '@fontsource/nunito/700.css';
+import '@fontsource/nunito/900.css';
 import type { AppProps } from 'next/app';
 
 import Header from '@/components/Header';
