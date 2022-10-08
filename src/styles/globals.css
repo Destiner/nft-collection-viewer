@@ -1,3 +1,14 @@
+:root {
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #484848;
+  --color-background-primary: #f8f8f8;
+  --color-background-secondary: #f4f4f4;
+  --color-accent-primary: #ff2990;
+  --color-accent-secondary: #e3006d;
+  --color-accent-tertiary: #b90059;
+  --color-border-primary: #bcbcbc;
+}
+
 html,
 body {
   padding: 0;
