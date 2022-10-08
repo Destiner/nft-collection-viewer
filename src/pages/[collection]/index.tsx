@@ -1,14 +1,27 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+import Hero from '@/components/collection/Hero';
+import { getDescription, getTitle } from '@/utils/collections';
 
 const Collection: NextPage = () => {
+  const router = useRouter();
+
+  const collectionSlug = router.query.collection as string;
+
+  const title = getTitle(collectionSlug);
+  const description = getDescription(collectionSlug);
+
+  console.log('collection', collectionSlug);
+
   return (
     <div>
       <Head>
-        <title>Azuki</title>
+        <title>{title}</title>
         <meta
           name="description"
-          content="Akuzi"
+          content={description || ''}
         />
         <link
           rel="icon"
@@ -16,7 +29,9 @@ const Collection: NextPage = () => {
         />
       </Head>
 
-      <main>Azuki</main>
+      <main>
+        <Hero id={collectionSlug} />
+      </main>
     </div>
   );
 };
