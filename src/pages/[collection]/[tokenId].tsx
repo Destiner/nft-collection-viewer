@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
@@ -113,7 +113,7 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
+const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   if (!params) {
     return {
       redirect: {
@@ -143,8 +143,28 @@ const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
     props: {
       asset,
     },
+    revalidate: 24 * 60 * 60,
+  };
+};
+
+const getStaticPaths: GetStaticPaths = () => {
+  const ids = [];
+  for (let i = 0; i < 10; i++) {
+    ids.push(i);
+  }
+  const paths = ids.map((id) => {
+    return {
+      params: {
+        collection: 'azuki',
+        tokenId: id.toString(),
+      },
+    };
+  });
+  return {
+    paths,
+    fallback: 'blocking',
   };
 };
 
 export default CollectionAsset;
-export { getServerSideProps };
+export { getStaticProps, getStaticPaths };
