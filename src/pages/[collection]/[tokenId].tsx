@@ -100,7 +100,7 @@ const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
   if (!params) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false,
       },
     };
@@ -115,7 +115,7 @@ const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
   if (!collectionAddress) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false,
       },
     };

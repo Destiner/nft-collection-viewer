@@ -62,7 +62,7 @@ const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   if (!context.params) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false,
       },
     };
@@ -77,7 +77,7 @@ const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   if (!collectionAddress) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false,
       },
     };
