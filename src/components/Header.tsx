@@ -19,6 +19,7 @@ const Header = () => {
 
         .brand {
           color: var(--color-text-primary);
+          cursor: pointer;
         }
       `}</style>
     </header>
