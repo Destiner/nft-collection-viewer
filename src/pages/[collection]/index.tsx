@@ -20,7 +20,7 @@ const Collection: NextPage<Props> = ({ assets }: Props) => {
   const router = useRouter();
 
   const collectionSlug = router.query.collection as string;
-  const page = parseInt((router.query.page || '0') as string);
+  const page = parseInt((router.query.page || '1') as string);
 
   const title = getTitle(collectionSlug);
   const description = getDescription(collectionSlug);
@@ -69,7 +69,16 @@ const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   }
 
   const collectionSlug = context.params.collection as string;
-  const page = parseInt((context.query.page || '0') as string);
+  const page = parseInt((context.query.page || '1') as string);
+
+  if (page < 1) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
 
   const service = new Service(key, chainId);
 

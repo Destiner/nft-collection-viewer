@@ -87,8 +87,8 @@ class Service {
     collection: string,
     page: number,
   ): Promise<AssetPreview[]> {
-    const startId = PER_PAGE * page;
-    const endId = PER_PAGE * (page + 1);
+    const startId = PER_PAGE * (page - 1);
+    const endId = PER_PAGE * page;
 
     const ids = [];
     for (let i = startId; i < endId; i++) {
@@ -142,7 +142,7 @@ class Service {
 
     const network = this.getNetwork();
     const limit = PER_PAGE;
-    const offset = page * PER_PAGE;
+    const offset = (page - 1) * PER_PAGE;
     const response = await fetch(
       `https://api.center.dev/v1/${network}/${collection}/assets/searchByTraits?limit=${limit}&offset=${offset}`,
       options,

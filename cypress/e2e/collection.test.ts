@@ -2,7 +2,7 @@ describe('Collection page', () => {
   beforeEach(() => cy.visit('/azuki'));
 
   it('default page is zero', () => {
-    cy.get('[data-testid="page-label"]').contains('0');
+    cy.get('[data-testid="page-label"]').contains('1');
   });
 
   // it('page query param updates the displayed page', () => {
@@ -13,6 +13,6 @@ describe('Collection page', () => {
 
   it('pagination updates the route', () => {
     cy.get('[data-testid="page-right"]').click();
-    cy.url().should('contain', 'page=1');
+    cy.url().should('contain', 'page=2');
   });
 });

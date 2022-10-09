@@ -2,16 +2,17 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 interface Props {
   page: number;
+  maxPage?: number;
   onPageUpdate: (newPage: number) => void;
 }
 
-const NavBar = ({ page, onPageUpdate }: Props) => {
+const NavBar = ({ page, maxPage, onPageUpdate }: Props) => {
   return (
     <div className="bar">
       <div className="paginator">
         <div
           data-testid="page-left"
-          className="page-button"
+          className={`page-button ${page === 1 ? 'disabled' : ''}`}
           onClick={() => onPageUpdate(page - 1)}
         >
           <FiArrowLeft />
@@ -24,7 +25,7 @@ const NavBar = ({ page, onPageUpdate }: Props) => {
         </span>
         <div
           data-testid="page-right"
-          className="page-button"
+          className={`page-button ${page === maxPage ? 'disabled' : ''}`}
           onClick={() => onPageUpdate(page + 1)}
         >
           <FiArrowRight />
@@ -50,6 +51,10 @@ const NavBar = ({ page, onPageUpdate }: Props) => {
 
         .page-button:hover {
           opacity: 1;
+        }
+
+        .page-button.disabled {
+          pointer-events: none;
         }
       `}</style>
     </div>
