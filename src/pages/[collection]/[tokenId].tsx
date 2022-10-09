@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -39,7 +40,12 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
 
       <main>
         <>
-          <img src={asset.metadata.image} />
+          <Image
+            src={asset.metadata.image}
+            alt="Asset image"
+            width={500}
+            height={500}
+          />
           <div className="metadata">
             <div className="heading">
               <div className="title">{assetTitle}</div>

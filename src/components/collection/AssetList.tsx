@@ -24,12 +24,12 @@ const AssetList = ({ collection, items }: Props) => {
             margin: 16px;
             display: flex;
             gap: 12px;
-            justify-content: space-between;
             flex-wrap: wrap;
           }
 
           @media (min-width: 768px) {
             .list {
+              margin: 32px;
               gap: 32px;
             }
           }

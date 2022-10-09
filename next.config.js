@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['ikzttp.mypinata.cloud'],
+  },
   redirects: async () => {
     return [
       {

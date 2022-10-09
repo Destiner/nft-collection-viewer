@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/future/image';
 
 import { AssetPreview } from '@/services/center';
 
@@ -16,7 +17,15 @@ const AssetItem = ({ collection, data }: Props) => {
       }}
     >
       <div className="card">
-        <img src={data.metadata.image} />
+        <div className="card-image">
+          <Image
+            src={data.metadata.image}
+            alt={`${data.metadata.name} image`}
+            width={160}
+            height={160}
+            style={{ borderRadius: '14px 14px 0 0' }}
+          />
+        </div>
         <div className="label">{data.metadata.name}</div>
         <style jsx>{`
           .card {
@@ -32,14 +41,13 @@ const AssetItem = ({ collection, data }: Props) => {
             border-color: var(--color-accent-primary);
           }
 
-          img {
+          .card-image > img {
             width: 100px;
             height: 100px;
-            border-radius: 14px 14px 0 0;
           }
 
           @media (min-width: 768px) {
-            img {
+            .card-image > img {
               width: 240px;
               height: 240px;
             }

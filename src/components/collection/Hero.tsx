@@ -65,7 +65,10 @@ const Hero = ({ id }: Props) => {
 
   return (
     <div className="hero">
-      <img src={`/assets/collection/${id}.png`} />
+      <img
+        src={`/assets/collection/${id}.png`}
+        alt="Collection image"
+      />
       <div className="metadata">
         <div className="metadata-base">
           <div className="title">{title}</div>
@@ -116,6 +119,7 @@ const Hero = ({ id }: Props) => {
 
         .metadata {
           display: flex;
+          flex: 1;
           flex-direction: column;
           justify-content: space-between;
           gap: 16px;
@@ -139,7 +143,9 @@ const Hero = ({ id }: Props) => {
         }
 
         @media (min-width: 768px) {
-          display: initial;
+          .description {
+            display: initial;
+          }
         }
 
         .metadata-links {
