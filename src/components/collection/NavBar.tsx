@@ -16,7 +16,12 @@ const NavBar = ({ page, onPageUpdate }: Props) => {
         >
           <FiArrowLeft />
         </div>
-        <span className="page-label">{page}</span>
+        <span
+          data-testid="page-label"
+          className="page-label"
+        >
+          {page}
+        </span>
         <div
           data-testid="page-right"
           className="page-button"
