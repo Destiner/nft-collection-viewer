@@ -17,7 +17,7 @@ interface AssetProps {
   asset: Asset;
 }
 
-const CollectionAsset: NextPage<AssetProps> = ({ asset }: AssetProps) => {
+const CollectionAsset: NextPage<AssetProps> = (props: Props) => {
   const router = useRouter();
 
   const collectionSlug = router.query.collection as string;
@@ -40,43 +40,45 @@ const CollectionAsset: NextPage<AssetProps> = ({ asset }: AssetProps) => {
         />
       </Head>
 
-      <main>
-        <>
-          <Image
-            src={asset.metadata.image}
-            alt="Asset image"
-            width={500}
-            height={500}
-            style={{
-              borderRadius: '16px',
-              border: '4px solid var(--color-accent-tertiary)',
-            }}
-          />
-          <div className="metadata">
-            <div className="heading">
-              <div className="title">{assetTitle}</div>
-              <div className="collection">
-                by{' '}
-                <Link
-                  href={{
-                    pathname: '/[collection]',
-                    query: { collection: collectionSlug },
-                  }}
-                >
-                  {collectionTitle}
-                </Link>
+      {'asset' in props && (
+        <main>
+          <>
+            <Image
+              src={props.asset.metadata.image}
+              alt="Asset image"
+              width={500}
+              height={500}
+              style={{
+                borderRadius: '16px',
+                border: '4px solid var(--color-accent-tertiary)',
+              }}
+            />
+            <div className="metadata">
+              <div className="heading">
+                <div className="title">{assetTitle}</div>
+                <div className="collection">
+                  by{' '}
+                  <Link
+                    href={{
+                      pathname: '/[collection]',
+                      query: { collection: collectionSlug },
+                    }}
+                  >
+                    {collectionTitle}
+                  </Link>
+                </div>
+              </div>
+              <div className="traits">
+                {props.asset.metadata.attributes.map((attribute, index) => (
+                  <div key={index}>
+                    {attribute['trait_type']}: {attribute['value']}
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="traits">
-              {asset.metadata.attributes.map((attribute, index) => (
-                <div key={index}>
-                  {attribute['trait_type']}: {attribute['value']}
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      </main>
+          </>
+        </main>
+      )}
 
       <style jsx>{`
         main {
