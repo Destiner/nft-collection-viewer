@@ -19,6 +19,7 @@ const NavIcon = ({ platform, id }: NavIconProps) => {
     <a
       href={urlMap[platform]}
       target="_blank"
+      rel="noreferrer"
     >
       <div className="wrapper">
         <div className="icon">
