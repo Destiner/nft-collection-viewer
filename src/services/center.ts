@@ -58,6 +58,71 @@ class Service {
   async getItems(
     collection: string,
     page: number,
+    traitFilters?: Record<string, string>,
+  ): Promise<AssetPreview[]> {
+    if (!traitFilters) {
+      return this.getMultipleAssets(collection, page);
+    } else {
+      return this.searchItemsByTraits(collection, page, traitFilters);
+    }
+  }
+
+  async getAsset(collection: string, tokenId: number): Promise<Asset> {
+    const options = {
+      headers: {
+        accept: 'application/json',
+        'X-API-Key': this.key,
+      },
+    };
+
+    const network = this.getNetwork();
+    const response = await fetch(
+      `https://api.center.dev/v1/${network}/${collection}/${tokenId}`,
+      options,
+    );
+    return await response.json();
+  }
+
+  private async getMultipleAssets(
+    collection: string,
+    page: number,
+  ): Promise<AssetPreview[]> {
+    const startId = PER_PAGE * page;
+    const endId = PER_PAGE * (page + 1);
+
+    const ids = [];
+    for (let i = startId; i < endId; i++) {
+      ids.push(i);
+    }
+    const assets = ids.map((id) => {
+      return {
+        Address: collection,
+        TokenID: id.toString(),
+      };
+    });
+
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'X-API-Key': 'key-cca7c1de9282-9e216b4e1807',
+      },
+      body: JSON.stringify({
+        assets,
+      }),
+    };
+
+    const response = await fetch(
+      `https://api.center.dev/v1/ethereum-mainnet/assets`,
+      options,
+    );
+    return await response.json();
+  }
+
+  private async searchItemsByTraits(
+    collection: string,
+    page: number,
     traitFilters: Record<string, string>,
   ): Promise<AssetPreview[]> {
     const query = Object.fromEntries(
@@ -85,22 +150,6 @@ class Service {
     return await response.json();
   }
 
-  async getAsset(collection: string, tokenId: number): Promise<Asset> {
-    const options = {
-      headers: {
-        accept: 'application/json',
-        'X-API-Key': this.key,
-      },
-    };
-
-    const network = this.getNetwork();
-    const response = await fetch(
-      `https://api.center.dev/v1/${network}/${collection}/${tokenId}`,
-      options,
-    );
-    return await response.json();
-  }
-
   private getNetwork(): string {
     switch (this.chainId) {
       case 1:
@@ -112,3 +161,4 @@ class Service {
 }
 
 export default Service;
+export type { Trait, AssetPreview, Asset };
