@@ -22,7 +22,7 @@ const AssetItem = ({ collection, data }: Props) => {
           .card {
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--color-border-primary);
+            border: 2px solid var(--color-border-secondary);
             border-radius: 16px;
             cursor: pointer;
             transition: all 0.25s ease-in-out;
@@ -35,7 +35,7 @@ const AssetItem = ({ collection, data }: Props) => {
           img {
             width: 240px;
             height: 240px;
-            border-radius: 15px 15px 0 0;
+            border-radius: 14px 14px 0 0;
           }
 
           .label {

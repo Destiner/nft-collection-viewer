@@ -23,8 +23,8 @@ const AssetList = ({ collection, items }: Props) => {
           .list {
             margin: 32px;
             display: flex;
-            gap: 48px;
-            justify-content: center;
+            gap: 32px;
+            justify-content: space-between;
             flex-wrap: wrap;
           }
         `}
