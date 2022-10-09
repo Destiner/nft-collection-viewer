@@ -34,6 +34,9 @@ jobs:
       - name: Tests
         run: npm run test:jest
 
+      - name: Build
+        run: npm run build
+
   cypress-run:
     name: Cypress
     runs-on: ubuntu-latest
