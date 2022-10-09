@@ -8,8 +8,8 @@ import Service, { Asset } from '@/services/center';
 import { getAddress, getTitle } from '@/utils/collections';
 import { ChainId } from '@/utils/chains';
 
-const key = process.env.NEXT_PUBLIC_CENTER_KEY || '';
-const chainId = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || '1') as ChainId;
+const key = process.env.CENTER_KEY || '';
+const chainId = parseInt(process.env.CHAIN_ID || '1') as ChainId;
 
 interface Props {
   asset: Asset;
