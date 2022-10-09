@@ -12,9 +12,15 @@ const Header = () => {
           border-top: 4px solid var(--color-accent-primary);
           display: flex;
           align-items: center;
-          padding: 0 32px;
+          padding: 0 16px;
           font-weight: 900;
           font-size: 20px;
+        }
+
+        @media (min-width: 768px) {
+          header {
+            padding: 0 32px;
+          }
         }
 
         .brand {

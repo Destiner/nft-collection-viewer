@@ -90,19 +90,35 @@ const Hero = ({ id }: Props) => {
       <style jsx>{`
         .hero {
           display: flex;
-          gap: 64px;
-          padding: 24px 32px;
+          flex-wrap: wrap;
+          gap: 24px;
+          padding: 24px 16px;
           background: var(--color-background-secondary);
         }
 
+        @media (min-width: 768px) {
+          .hero {
+            gap: 64px;
+            padding: 24px 32px;
+          }
+        }
+
         img {
-          height: 255px;
+          width: 100%;
+        }
+
+        @media (min-width: 768px) {
+          img {
+            width: auto;
+            height: 255px;
+          }
         }
 
         .metadata {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          gap: 16px;
         }
 
         .metadata-base {
@@ -117,8 +133,13 @@ const Hero = ({ id }: Props) => {
         }
 
         .description {
+          display: none;
           font-weight: 400;
           font-size: 16px;
+        }
+
+        @media (min-width: 768px) {
+          display: initial;
         }
 
         .metadata-links {

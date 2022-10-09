@@ -21,11 +21,17 @@ const AssetList = ({ collection, items }: Props) => {
       <style jsx>
         {`
           .list {
-            margin: 32px;
+            margin: 16px;
             display: flex;
-            gap: 32px;
+            gap: 12px;
             justify-content: space-between;
             flex-wrap: wrap;
+          }
+
+          @media (min-width: 768px) {
+            .list {
+              gap: 32px;
+            }
           }
         `}
       </style>

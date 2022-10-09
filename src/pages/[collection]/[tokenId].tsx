@@ -68,23 +68,44 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
 
       <style jsx>{`
         main {
-          padding: 32px;
+          padding: 16px;
           display: flex;
-          gap: 64px;
+          flex-wrap: wrap;
+          gap: 32px;
           background: var(--color-background-secondary);
         }
 
+        @media (min-width: 768px) {
+          main {
+            padding: 32px;
+            gap: 64px;
+          }
+        }
+
         img {
-          width: 500px;
-          height: 500px;
+          width: 100%;
+          height: 100%;
           border-radius: 16px;
           border: 4px solid var(--color-accent-tertiary);
         }
 
+        @media (min-width: 768px) {
+          img {
+            width: 500px;
+            height: 500px;
+          }
+        }
+
         .metadata {
           display: flex;
-          gap: 64px;
+          gap: 16px;
           flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+          .metadata {
+            gap: 64px;
+          }
         }
 
         .title {

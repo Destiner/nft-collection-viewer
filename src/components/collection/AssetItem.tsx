@@ -33,9 +33,16 @@ const AssetItem = ({ collection, data }: Props) => {
           }
 
           img {
-            width: 240px;
-            height: 240px;
+            width: 100px;
+            height: 100px;
             border-radius: 14px 14px 0 0;
+          }
+
+          @media (min-width: 768px) {
+            img {
+              width: 240px;
+              height: 240px;
+            }
           }
 
           .label {
