@@ -10,6 +10,7 @@ const NavBar = ({ page, onPageUpdate }: Props) => {
     <div className="bar">
       <div className="paginator">
         <div
+          data-testid="page-left"
           className="page-button"
           onClick={() => onPageUpdate(page - 1)}
         >
@@ -17,6 +18,7 @@ const NavBar = ({ page, onPageUpdate }: Props) => {
         </div>
         <span className="page-label">{page}</span>
         <div
+          data-testid="page-right"
           className="page-button"
           onClick={() => onPageUpdate(page + 1)}
         >
