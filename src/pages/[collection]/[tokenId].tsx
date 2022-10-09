@@ -11,11 +11,13 @@ import { ChainId } from '@/utils/chains';
 const key = process.env.CENTER_KEY || '';
 const chainId = parseInt(process.env.CHAIN_ID || '1') as ChainId;
 
-interface Props {
+type Props = AssetProps | {};
+
+interface AssetProps {
   asset: Asset;
 }
 
-const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
+const CollectionAsset: NextPage<AssetProps> = ({ asset }: AssetProps) => {
   const router = useRouter();
 
   const collectionSlug = router.query.collection as string;
@@ -116,10 +118,7 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
 const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   if (!params) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      props: {},
     };
   }
 
@@ -141,10 +140,7 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   if (!asset) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      props: {},
     };
   }
 
