@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import Service, { Asset } from '@/services/center';
 import { getAddress, getTitle } from '@/utils/collections';
@@ -42,7 +43,17 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
           <div className="metadata">
             <div className="heading">
               <div className="title">{assetTitle}</div>
-              <div className="collection">by {collectionTitle}</div>
+              <div className="collection">
+                by{' '}
+                <Link
+                  href={{
+                    pathname: '/[collection]',
+                    query: { collection: collectionSlug },
+                  }}
+                >
+                  {collectionTitle}
+                </Link>
+              </div>
             </div>
             <div className="traits">
               {asset.metadata.attributes.map((attribute, index) => (
