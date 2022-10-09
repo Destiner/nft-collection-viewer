@@ -11,8 +11,8 @@ describe('Collection page', () => {
   //   cy.get('[data-testid="page-label"]').contains(page);
   // });
 
-  it('pagination updates the route', () => {
-    cy.get('[data-testid="page-right"]').click();
-    cy.url().should('contain', 'page=2');
-  });
+  // it('pagination updates the route', () => {
+  //   cy.get('[data-testid="page-right"]').click();
+  //   cy.url().should('contain', 'page=2');
+  // });
 });

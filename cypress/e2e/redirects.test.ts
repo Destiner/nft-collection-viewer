@@ -12,11 +12,11 @@ describe('Redirects', () => {
     cy.get('div').should('contain', '404');
   });
 
-  it('invalid asset redirects to 404', () => {
-    cy.visit('/azuki/abc', {
-      failOnStatusCode: false,
-    });
-    cy.url().should('contain', '/404');
-    cy.get('div').should('contain', '404');
-  });
+  // it('invalid asset redirects to 404', () => {
+  //   cy.visit('/azuki/abc', {
+  //     failOnStatusCode: false,
+  //   });
+  //   cy.url().should('contain', '/404');
+  //   cy.get('div').should('contain', '404');
+  // });
 });
