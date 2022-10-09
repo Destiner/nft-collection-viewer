@@ -142,7 +142,10 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   if (!asset) {
     return {
-      props: {},
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
     };
   }
 
