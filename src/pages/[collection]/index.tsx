@@ -13,8 +13,6 @@ const Collection: NextPage = () => {
   const title = getTitle(collectionSlug);
   const description = getDescription(collectionSlug);
 
-  console.log('collection', collectionSlug);
-
   return (
     <div>
       <Head>
