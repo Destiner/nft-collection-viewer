@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 import AssetList from '@/components/collection/AssetList';
 import Hero from '@/components/collection/Hero';
@@ -13,36 +12,21 @@ import { ChainId } from '@/utils/chains';
 const key = process.env.NEXT_PUBLIC_CENTER_KEY || '';
 const chainId = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || '1') as ChainId;
 
-const Collection: NextPage = () => {
+interface Props {
+  assets: AssetPreview[];
+}
+
+const Collection: NextPage<Props> = ({ assets }: Props) => {
   const router = useRouter();
-  const service = new Service(key, chainId);
 
   const collectionSlug = router.query.collection as string;
+  const page = parseInt((router.query.page || '0') as string);
 
-  const [page, setPage] = useState(0);
-  const [assets, setAssets] = useState<AssetPreview[]>([]);
-  const [isLoading, setLoading] = useState(true);
-
-  const address = getAddress(collectionSlug);
   const title = getTitle(collectionSlug);
   const description = getDescription(collectionSlug);
 
-  useEffect(() => {
-    fetchAssets();
-  }, [page]);
-
-  async function fetchAssets(): Promise<void> {
-    if (!address) {
-      return;
-    }
-    setLoading(true);
-    const assets = await service.getItems(address, page);
-    setAssets(assets);
-    setLoading(false);
-  }
-
   function handlePageUpdate(newPage: number): void {
-    setPage(newPage);
+    router.push(`/${collectionSlug}?page=${newPage}`);
   }
 
   return (
@@ -74,4 +58,38 @@ const Collection: NextPage = () => {
   );
 };
 
+const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  if (!context.params) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  const collectionSlug = context.params.collection as string;
+  const page = parseInt((context.query.page || '0') as string);
+
+  const service = new Service(key, chainId);
+
+  const collectionAddress = getAddress(collectionSlug);
+  if (!collectionAddress) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  const assets = await service.getItems(collectionAddress, page);
+
+  return {
+    props: {
+      assets,
+    },
+  };
+};
+
 export default Collection;
+export { getServerSideProps };
