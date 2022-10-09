@@ -36,6 +36,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          CHAIN_ID: 1
+          CENTER_KEY: ${{ secrets.CENTER_KEY }}
 
   cypress-run:
     name: Cypress
