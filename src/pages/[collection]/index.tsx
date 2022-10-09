@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import AssetList from '@/components/collection/AssetList';
 import Hero from '@/components/collection/Hero';
+import NavBar from '@/components/collection/NavBar';
 import Service, { AssetPreview } from '@/services/center';
 import { getAddress, getDescription, getTitle } from '@/utils/collections';
 import { ChainId } from '@/utils/chains';
@@ -18,6 +19,7 @@ const Collection: NextPage = () => {
 
   const collectionSlug = router.query.collection as string;
 
+  const [page, setPage] = useState(0);
   const [assets, setAssets] = useState<AssetPreview[]>([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -27,16 +29,20 @@ const Collection: NextPage = () => {
 
   useEffect(() => {
     fetchAssets();
-  }, []);
+  }, [page]);
 
   async function fetchAssets(): Promise<void> {
     if (!address) {
       return;
     }
     setLoading(true);
-    const assets = await service.getItems(address, 0);
+    const assets = await service.getItems(address, page);
     setAssets(assets);
     setLoading(false);
+  }
+
+  function handlePageUpdate(newPage: number): void {
+    setPage(newPage);
   }
 
   return (
@@ -55,6 +61,10 @@ const Collection: NextPage = () => {
 
       <main>
         <Hero id={collectionSlug} />
+        <NavBar
+          page={page}
+          onPageUpdate={handlePageUpdate}
+        />
         <AssetList
           collection={collectionSlug}
           items={assets}
