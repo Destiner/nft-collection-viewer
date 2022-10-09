@@ -45,6 +45,10 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
             alt="Asset image"
             width={500}
             height={500}
+            style={{
+              borderRadius: '16px',
+              border: '4px solid var(--color-accent-tertiary)',
+            }}
           />
           <div className="metadata">
             <div className="heading">
@@ -85,20 +89,6 @@ const CollectionAsset: NextPage<Props> = ({ asset }: Props) => {
           main {
             padding: 32px;
             gap: 64px;
-          }
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          border-radius: 16px;
-          border: 4px solid var(--color-accent-tertiary);
-        }
-
-        @media (min-width: 768px) {
-          img {
-            width: 500px;
-            height: 500px;
           }
         }
 
