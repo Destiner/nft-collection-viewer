@@ -67,7 +67,7 @@ class Service {
     }
   }
 
-  async getAsset(collection: string, tokenId: number): Promise<Asset> {
+  async getAsset(collection: string, tokenId: number): Promise<Asset | null> {
     const options = {
       headers: {
         accept: 'application/json',
@@ -80,7 +80,11 @@ class Service {
       `https://api.center.dev/v1/${network}/${collection}/${tokenId}`,
       options,
     );
-    return await response.json();
+    const asset = await response.json();
+    if (asset.error) {
+      return null;
+    }
+    return asset;
   }
 
   private async getMultipleAssets(

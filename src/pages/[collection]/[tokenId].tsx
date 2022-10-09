@@ -139,6 +139,15 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   }
   const asset = await service.getAsset(collectionAddress, tokenId);
 
+  if (!asset) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       asset,
