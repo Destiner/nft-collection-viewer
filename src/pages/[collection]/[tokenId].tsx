@@ -116,10 +116,7 @@ const CollectionAsset: NextPage<Props> = (props: Props) => {
 const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   if (!params) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
@@ -131,20 +128,14 @@ const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const collectionAddress = getAddress(collectionSlug);
   if (!collectionAddress) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
   const asset = await service.getAsset(collectionAddress, tokenId);
 
   if (!asset) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 

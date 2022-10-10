@@ -61,10 +61,7 @@ const Collection: NextPage<Props> = ({ assets }: Props) => {
 const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   if (!context.params) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
@@ -73,10 +70,7 @@ const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 
   if (page < 1) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
@@ -85,10 +79,7 @@ const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const collectionAddress = getAddress(collectionSlug);
   if (!collectionAddress) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
   const assets = await service.getItems(collectionAddress, page);
