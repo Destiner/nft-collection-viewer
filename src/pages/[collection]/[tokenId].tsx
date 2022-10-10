@@ -46,6 +46,8 @@ const CollectionAsset: NextPage<Props> = (props: Props) => {
             width={500}
             height={500}
             style={{
+              maxWidth: '100%',
+              height: 'auto',
               borderRadius: '16px',
               border: '4px solid var(--color-accent-tertiary)',
             }}
